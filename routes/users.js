@@ -10,8 +10,7 @@ const router = express.Router();
 router.post('/register', (request, response) => {
     const { first_name, last_name, email, password, mobile_no } = request.body;
     const encryptedPassword = CryptoJS.SHA256(password).toString();
-    const statement = `INSERT INTO users (first_name,last_name,email,password_hash,mobile_no)
-                        VALUES (?,?,?,?,?)`;
+    const statement = `INSERT INTO users (first_name,last_name,email,password_hash,mobile_no) VALUES (?,?,?,?,?)`;
     const values = [first_name, last_name, email, encryptedPassword, mobile_no];
     db.query(statement, values, (error, data) => {
         response.send(result.createResult(error, data));
